@@ -2,21 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Вход</title>
+    <title>Регистрация</title>
 </head>
 <body>
-<h1>Логин</h1>
-<form action="/login" method="post">
+<h1>Регистрация</h1>
+<form action="/register" method="post">
     <label>
         Логин
         <input type="text" name="username" />
+    </label>
+    <label>
+        Email
+        <input type="email" name="email" />
     </label>
     <label>
         Пароль
         <input type="password" name="password" />
     </label>
     {% csrf_token %}
-    <button>Войти</button>
+    <button>Зарегистрироваться</button>
 </form>
 </body>
 </html>

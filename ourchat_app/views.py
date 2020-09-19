@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm, MessageForm
 from django.http import HttpResponseBadRequest
-from .models import User
+from .models import User, Message
 
 
 def home_view(request):
@@ -31,12 +31,20 @@ def logout_view(request):
 def messages_view(request):
     if not request.user.is_authenticated:
         return redirect("/login")
-    return render(request, "messages.html", {})
+    if request.method == "POST":
+        form = MessageForm(data=request.POST)
+        form.is_valid()
+        Message.objects.create(text=form.cleaned_data["text"], user=request.user)
+    return render(request, "messages.html", {
+        "messages": Message.objects.all()
+    })
 
-"""
-if request.method == "POST":
-    ...
-    User.objects.create_user(**form.cleaned_data)
-    redirect("/login")
-return render
-"""
+
+def register_view(request):
+    if request.method == "POST":
+        form = RegisterForm(data=request.POST)
+        form.is_valid()
+        User.objects.create_user(username=form.cleaned_data["username"], email=form.cleaned_data["email"],
+                                 password=form.cleaned_data["password"])
+        return redirect("/login")
+    return render(request, "register.html", {})
