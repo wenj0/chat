@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>OurChat</title>
 </head>
 <body>
     <h1>OurChat</h1>
     {% if request.user.is_authenticated %}
     <h4>Привет, @{{ request.user.username}}!</h4>
-    <a href="/messages">Перейти к сообщениям</a>
+    <a href="/chat/create">Создать чат</a>
     <a href="/logout">Выйти</a>
     {% else %}
     <a href="/login">Войти в чат </a>

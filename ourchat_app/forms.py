@@ -14,3 +14,7 @@ class RegisterForm(forms.Form):
 
 class MessageForm(forms.Form):
     text = forms.CharField()
+
+
+class CreateChatForm(forms.Form):
+    name = forms.CharField()

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .forms import LoginForm, RegisterForm, MessageForm
+from .forms import LoginForm, RegisterForm, MessageForm, CreateChatForm
 from django.http import HttpResponseBadRequest
-from .models import User, Message
+from .models import User, Message, Chat
 
 
 def home_view(request):
@@ -48,3 +48,12 @@ def register_view(request):
                                  password=form.cleaned_data["password"])
         return redirect("/login")
     return render(request, "register.html", {})
+
+
+def create_chat_view(request):
+    if request.method == "POST":
+        form = CreateChatForm(data=request.POST)
+        form.is_valid()
+        chat = Chat.objects.create(name=form.cleaned_data["name"])
+        return redirect("/chat/{}/".format(chat.id))
+    return render(request, "create_chat.html", {})

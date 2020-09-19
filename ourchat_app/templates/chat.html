@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат {{ name }}(#{{ id }})</title>
+</head>
+<body>
+    <h1>Чат {{ name }}(#{{ id }})</h1>
+    {% for message in messages %}
+    <div>
+        <p>{{ message.text }}</p>
+        <p><small>@{{ message.user.username }}</small>&nbsp;<small>{{ message.datetime_created }}</small></p>
+    </div>
+    {% endfor %}
+    <form action="/chat/{{ id }}" method="post">
+        <textarea name="text" placeholder="Сообщение"></textarea>
+        {% csrf_token %}
+        <button>Отправить</button>
+    </form>
+</body>
+</html>

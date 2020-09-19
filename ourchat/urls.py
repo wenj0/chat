@@ -23,6 +23,6 @@ urlpatterns = [
     path('', views.home_view),
     path('login', views.login_view),
     path('logout', views.logout_view),
-    path('messages', views.messages_view),
+    path('chat/create', views.create_chat_view),
     path('register', views.register_view),
 ]
