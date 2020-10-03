@@ -18,3 +18,7 @@ class MessageForm(forms.Form):
 
 class CreateChatForm(forms.Form):
     name = forms.CharField()
+
+
+class ChatInviteForm(forms.Form):
+    username = forms.CharField()

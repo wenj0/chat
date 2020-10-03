@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from ourchat_app import views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view),
     path('login', views.login_view),
     path('logout', views.logout_view),
     path('chat/create', views.create_chat_view),
+    path('chat/<int:chat_id>', views.chat_view),
+    path('chat/<int:chat_id>/invite', views.chat_invite_view),
+    path('chat/<int:chat_id>/members', views.chat_members_view),
     path('register', views.register_view),
+    path('chats', views.chats_view),
 ]

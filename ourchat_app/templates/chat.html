@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Чат {{ name }}(#{{ id }})</title>
+    <title>Чат {{ chat.name }}(#{{ chat.id }})</title>
 </head>
 <body>
-    <h1>Чат {{ name }}(#{{ id }})</h1>
+    <h1>Чат {{ chat.name }}(#{{ chat.id }})</h1>
+
+    <div>
+        <a href="/chat/{{ chat.id }}/members">Участники чата</a>
+       {% if role.role == role.ROLE_CREATOR %} <a href="/chat/{{ chat.id }}/invite">Добавить участника</a>{% endif %}
+    </div>
+
     {% for message in messages %}
     <div>
         <p>{{ message.text }}</p>
         <p><small>@{{ message.user.username }}</small>&nbsp;<small>{{ message.datetime_created }}</small></p>
     </div>
     {% endfor %}
-    <form action="/chat/{{ id }}" method="post">
+    <form action="/chat/{{ chat.id }}" method="post">
         <textarea name="text" placeholder="Сообщение"></textarea>
         {% csrf_token %}
         <button>Отправить</button>

@@ -8,6 +8,7 @@
     <h1>OurChat</h1>
     {% if request.user.is_authenticated %}
     <h4>Привет, @{{ request.user.username}}!</h4>
+    <a href="/chats">Чаты</a>
     <a href="/chat/create">Создать чат</a>
     <a href="/logout">Выйти</a>
     {% else %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Участники чата</title>
+</head>
+<body>
+<h1>Участники чата {{chat.name}} (#{{chat.id}})</h1>
+<table>
+    <tr>
+    <th>
+        Имя пользователя
+    </th>
+    <th>Действия</th></tr>
+
+    {% for member in members %}
+    <tr>
+        <td>@{{ member.username }}</td>
+        <td>{% if is_creator and member.id != request.user.id %}
+            <form action="/chat/{{ chat.id }}/kick" method="post">
+                <input type="hidden" name="user_id" value="{{ member.id }}">
+                {% csrf_token %}
+                <button>Кикнуть</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

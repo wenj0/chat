@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить в чат</title>
+</head>
+<body>
+<h1>Добавить пользователя в чат {{ chat.name }} (#{{ chat.id}})</h1>
+<form action="/chat/{{ chat.id }}/invite" method="post">
+    @<input type="text" name="username" placeholder="Имя пользователя">
+    {% csrf_token %}
+    <button>Добавить</button>
+</form>
+</body>
+</html>
