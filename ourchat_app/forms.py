@@ -22,3 +22,7 @@ class CreateChatForm(forms.Form):
 
 class ChatInviteForm(forms.Form):
     username = forms.CharField()
+
+
+class ChatKickForm(forms.Form):
+    id = forms.IntegerField()

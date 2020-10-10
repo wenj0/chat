@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
-from .forms import LoginForm, RegisterForm, MessageForm, CreateChatForm, ChatInviteForm
+from .forms import LoginForm, RegisterForm, MessageForm, CreateChatForm, ChatInviteForm, ChatKickForm
 from django.http import HttpResponseBadRequest, HttpResponseForbidden
 from .models import User, Message, Chat, ChatRole
 
@@ -100,7 +100,8 @@ def chat_members_view(request, chat_id):
     except ChatRole.DoesNotExist:
         return HttpResponseForbidden("Forbidden")
     members = list(map(lambda r: r.user, ChatRole.objects.filter(chat=chat).order_by("user__username")))
-    return render(request, "chat_members.html", {"chat": chat, "members": members, "is_creator": role.role == ChatRole.ROLE_CREATOR})
+    return render(request, "chat_members.html",
+                  {"chat": chat, "members": members, "is_creator": role.role == ChatRole.ROLE_CREATOR})
 
 
 def chats_view(request):
@@ -108,3 +109,26 @@ def chats_view(request):
         return redirect("/login")
     chats = list(map(lambda r: r.chat, ChatRole.objects.filter(user=request.user).order_by("chat__name")))
     return render(request, "chats.html", {"chats": chats})
+
+
+def chat_kick_view(request, chat_id):
+    if not request.user.is_authenticated:
+        return redirect("/login")
+    chat = get_object_or_404(Chat.objects.all(), id=chat_id)
+    try:
+        role = ChatRole.objects.get(chat=chat, user=request.user)
+    except ChatRole.DoesNotExist:
+        return HttpResponseForbidden("Forbidden")
+    if role.role != ChatRole.ROLE_CREATOR:
+        return HttpResponseForbidden("Forbidden")
+    if request.method == "POST":
+        form = ChatKickForm(data=request.POST)
+        form.is_valid()
+        try:
+            user = User.objects.get(id=form.cleaned_data["id"])
+            if user == request.user:
+                return HttpResponseBadRequest("Do you really want to kick yourself?")
+            ChatRole.objects.filter(user=user, chat=chat).delete()
+            return redirect("/chat/{}".format(chat.id))
+        except User.DoesNotExist or ChatRole.DoesNotExist:
+            return HttpResponseBadRequest("No such user")
