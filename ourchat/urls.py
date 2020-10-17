@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
 from ourchat_app import views
+from ourchat import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +31,5 @@ urlpatterns = [
     path('chat/<int:chat_id>/kick', views.chat_kick_view),
     path('register', views.register_view),
     path('chats', views.chats_view),
+    path('user/<str:username>',views.userpage_view),
 ]

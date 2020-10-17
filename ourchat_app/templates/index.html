@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>OurChat</title>
-</head>
-<body>
-    <h1>OurChat</h1>
-    {% if request.user.is_authenticated %}
-    <h4>Привет, @{{ request.user.username}}!</h4>
-    <a href="/chats">Чаты</a>
-    <a href="/chat/create">Создать чат</a>
-    <a href="/logout">Выйти</a>
-    {% else %}
-    <a href="/login">Войти в чат </a>
-    <a href="/register">Регистрация</a>
-    {% endif %}
-</body>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@300;400;600&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body id="home-page">
+    <div id="bg-green"></div>
+    <div id="bg-blue"></div>
+    <div id="home-page-content">
+      <h1>OurChat</h1>
+      {% if request.user.is_authenticated %}
+      <h4>Привет, @{{ request.user.username}}!</h4>
+      <a class="btn" href="/chats">Чаты</a>
+      <a class="btn" href="/chat/create">Создать чат</a>
+      <a class="btn" href="/logout">Выйти</a>
+      {% else %}
+      <a class="btn" href="/login">Войти в чат </a>
+      <a class="btn" href="/register">Регистрация</a>
+      {% endif %}
+    </div>
+  </body>
 </html>

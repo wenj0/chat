@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from .forms import LoginForm, RegisterForm, MessageForm, CreateChatForm, ChatInviteForm, ChatKickForm
-from django.http import HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponseBadRequest, HttpResponseForbidden, Http404
 from .models import User, Message, Chat, ChatRole
 
 
@@ -132,3 +132,11 @@ def chat_kick_view(request, chat_id):
             return redirect("/chat/{}".format(chat.id))
         except User.DoesNotExist or ChatRole.DoesNotExist:
             return HttpResponseBadRequest("No such user")
+
+
+def userpage_view(request, username):
+    try:
+        user = User.objects.get_by_natural_key(username)
+        return render(request, "userpage.html", {"username": user.username})
+    except User.DoesNotExist:
+        return Http404("No such user")
