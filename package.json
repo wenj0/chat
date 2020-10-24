@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "build-css": "node-sass --output ourchat_app/static --output-style compressed ourchat_app/assets/scss/style.scss"
   },
   "repository": {
     "type": "git",
