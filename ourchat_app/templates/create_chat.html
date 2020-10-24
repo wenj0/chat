@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Создать чат</title>
-</head>
-<body>
+{% extends "page.html" %}
+{% block page_title %}Создать Чат{% endblock %}
+{% block page_body %}
+<div id="create-chat-content">
 <h1>Создать чат</h1>
 <form action="/chat/create" method="post">
     <label>
@@ -14,5 +11,5 @@
     {% csrf_token %}
     <button>Создать</button>
 </form>
-</body>
-</html>
+</div>
+{% endblock %}

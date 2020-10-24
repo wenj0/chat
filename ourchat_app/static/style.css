@@ -22,7 +22,7 @@ body {
   width: 50vw;
 }
 
-body#home-page {
+body#home-page{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,15 +33,20 @@ body#home-page {
   bottom: 0;
 }
 
-#home-page-content {
+body{
+    background: #26547c;
+}
+
+#home-page-content, #create-chat-content {
   padding: 20px;
   border-radius: 10px;
   background: white;
   min-width: 300px;
+  max-width: 400px;
   text-align: center;
 }
 
-a.btn {
+a.btn, button {
   text-decoration: none;
   display: block;
   color: white;
@@ -50,8 +55,11 @@ a.btn {
   text-align: center;
   margin: 5px 0;
   border-radius: 5px;
+  font: inherit;
+  border: none;
 }
 
-a.btn:hover {
+a.btn:hover, button:hover {
   background: #05a178;
+  cursor: pointer;
 }

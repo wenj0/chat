@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %}{% endblock %}</title>
+     {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@300;400;600&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}" />
+</head>
+<body>
+    {% block page_body %} {% endblock %}
+</body>
+</html>

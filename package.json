@@ -1,0 +1,22 @@
+{
+  "name": "ourchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenj0/chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wenj0/chat/issues"
+  },
+  "homepage": "https://github.com/wenj0/chat#readme",
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  }
+}
