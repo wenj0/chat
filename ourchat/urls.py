@@ -29,7 +29,8 @@ urlpatterns = [
     path('chat/<int:chat_id>/invite', views.chat_invite_view),
     path('chat/<int:chat_id>/members', views.chat_members_view),
     path('chat/<int:chat_id>/kick', views.chat_kick_view),
+    path('chat/<int:chat_id>/updates', views.chat_updates_view),
     path('register', views.register_view),
     path('chats', views.chats_view),
-    path('user/<str:username>',views.userpage_view),
+    path('user/<str:username>', views.userpage_view),
 ]

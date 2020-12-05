@@ -1,8 +1,20 @@
+@import "file";
 /* https://coolors.co/26547c-ef476f-ffd166-06d6a0-fcfcfc */
 
 $main-color: #06d6a0;
 $main-color-shade: #05a178;
 $dark-color: #26547c;
+
+@function makeColorLighter($color) {
+  @return lighten($color, 20);
+}
+
+@function makeColorDarker($color) {
+  @for $i from 1 to 10 {
+    $color: darken($color, 1);
+  }
+  @return $color;
+}
 
 body {
   font-family: "Fira Sans Extra Condensed", sans-serif;
@@ -17,6 +29,7 @@ body {
   bottom: 0;
   width: 50vw;
 }
+
 #bg-blue {
   position: fixed;
   z-index: -1;
@@ -68,6 +81,11 @@ button {
 
 a.btn:hover,
 button:hover {
-  background: $main-color-shade;
+  background: makeColorDarker($main-color);
   cursor: pointer;
+}
+
+#messages {
+  max-height: 50vh;
+  overflow-y: auto;
 }
